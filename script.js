@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     const donationAddresses = {
         BTC: "B1AjCvBBSTs2GFtVd4Pj5dALMVMnHU2wDY2mSnAUBp64",
         ETH: "0x123456789abcdef123456789abcdef123456789a",
@@ -6,7 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
         SOL: "So1aNa123456789abcdef123456789abcdef123"
     };
 
-    let apiKeys = [];
+    const apiKeys = [
+        "326d530012b012b609239003d7e440baaeb16290fcd9ee997d35096073a1e7f7",
+        "b9d207e88abea6603bac7a2e4bd0432a2abc6724a9d1f6ecffa0dabbc5536647",
+        "430413d497388e5516243a9f04793f383deab60197ff28b76df00d52b3f713c9",
+        "34862f40ab453ea8a50ca78a2404a604d7d6620903940bc36cb886cecf97ad09"
+    ];
     let apiKeyIndex = 0;
 
     const button = document.getElementById("donateButton");
@@ -16,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     container.style.gap = "8px";
     container.style.marginTop = "10px";
 
-    button.addEventListener("click", function () {
+    button.addEventListener("click", function() {
         container.style.display = container.style.display === "none" ? "flex" : "none";
     });
 
@@ -26,9 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
         copyButton.classList.add("copy-button");
 
         copyButton.onclick = () => {
-            navigator.clipboard.writeText(donationAddresses[coin])
-                .then(() => alert(`${coin} address copied to clipboard!`))
-                .catch(err => console.error("Failed to copy:", err));
+            const tempInput = document.createElement("input");
+            tempInput.value = donationAddresses[coin];
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert(`${coin} address copied to clipboard!`);
         };
 
         container.appendChild(copyButton);
@@ -36,38 +45,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     button.parentNode.insertBefore(container, button.nextSibling);
 
-    // Fetch API keys securely from Netlify Function
-    function fetchApiKeys() {
-        return fetch('/.netlify/functions/getApiKeys')
-            .then(response => response.json())
-            .then(data => {
-                if (data.apiKeys && Array.isArray(data.apiKeys) && data.apiKeys.length > 0) {
-                    apiKeys = data.apiKeys;
-                    console.log("Loaded API keys:", apiKeys);
-                } else {
-                    console.error("No API keys found in Netlify function response.");
-                }
-            })
-            .catch(error => console.error("Error loading API keys:", error));
-    }
-
     // Fetch Crypto News
     function fetchCryptoNews() {
-        if (apiKeys.length === 0) {
-            console.error("No API keys available. Skipping fetch.");
-            return;
-        }
-
         const newsApiKey = apiKeys[apiKeyIndex];
-        apiKeyIndex = (apiKeyIndex + 1) % apiKeys.length; // Rotate API keys
-
         fetch(`https://min-api.cryptocompare.com/data/v2/news/?lang=EN&api_key=${newsApiKey}`)
             .then(response => response.json())
             .then(data => {
                 const newsContainer = document.getElementById("newsContainer");
                 newsContainer.innerHTML = "";
-
-                if (data?.Data?.length > 0) {
+                if (data && data.Data && Array.isArray(data.Data)) {
                     data.Data.forEach(article => {
                         const newsItem = document.createElement("div");
                         newsItem.innerHTML = `
@@ -89,9 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // Load API keys first, then fetch news
-    fetchApiKeys().then(() => {
-        fetchCryptoNews();
-        setInterval(fetchCryptoNews, 3600000); // Refresh news every 1 hour
-    });
+    setInterval(fetchCryptoNews, 3600000); // Refresh news every 1 hour
+    fetchCryptoNews();
 });
