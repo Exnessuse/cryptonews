@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3e5f5;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #6a1b9a;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+}
+
+.header img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+#donateButton {
+    background: #ff4081;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#newsContainer, #cryptoPrices {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-top: 15px;
+}
+
+#cryptoPrices {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.crypto-box {
+    padding: 8px 15px;
+    background: #6a1b9a;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.copy-button {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 6px 10px;
+    background: #d8b4fe;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+    margin: 5px;
+}
+
+.copy-button:hover {
+    background: #c084fc;
+}
+
+.terms-content {
+    max-width: 800px;
+    margin: 15px; /* Add some margin for spacing */
+    padding: 15px;
+    line-height: 1.6;
+    text-align: left; /* Align text to the left */
+}
+
+.terms-content h2 {
+    margin-top: 7.5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.terms-content p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    white-space: pre-wrap;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 15px; /* Add some margin for spacing */
+    padding: 15px;
+    line-height: 1.6;
+    text-align: left; /* Align text to the left */
+}
+
+.about-content h2 {
+    margin-top: 7.5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.about-content p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    white-space: pre-wrap;
+}
+
+.privacy-content {
+    max-width: 800px;
+    margin: 15px; /* Add some margin for spacing */
+    padding: 15px;
+    line-height: 1.6;
+    text-align: left; /* Align text to the left */
+}
+
+.privacy-content h2 {
+    margin-top: 7.5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.privacy-content p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    white-space: pre-wrap;
+}
+
+.disclaimer-content {
+    max-width: 800px;
+    margin: 15px; /* Add some margin for spacing */
+    padding: 15px;
+    line-height: 1.6;
+    text-align: left; /* Align text to the left */
+}
+
+.disclaimer-content h2 {
+    margin-top: 7.5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.disclaimer-content p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    white-space: pre-wrap;
+}
